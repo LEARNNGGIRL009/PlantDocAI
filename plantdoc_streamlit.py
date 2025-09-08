@@ -44,10 +44,10 @@ st.markdown("""
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    .healthy { border-left: 5px solid #2ecc71; background-color: #d4edda; }
-    .medium-risk { border-left: 5px solid #f39c12; background-color: #fff3cd; }
-    .high-risk { border-left: 5px solid #e67e22; background-color: #ffeaa7; }
-    .critical-risk { border-left: 5px solid #e74c3c; background-color: #f8d7da; }
+    .healthy { border-left: 5px solid #2ecc71; background-color: #d4edda;  color: #000000 !important;  }
+    .medium-risk { border-left: 5px solid #f39c12; background-color: #fff3cd;  color: #000000 !important;  }
+    .high-risk { border-left: 5px solid #e67e22; background-color: #ffeaa7;  color: #000000 !important;  }
+    .critical-risk { border-left: 5px solid #e74c3c; background-color: #f8d7da;  color: #000000 !important; }
     
     .metric-card {
         background: white;
@@ -373,4 +373,5 @@ st.markdown("""
     <p>Built with ❤️ for sustainable agriculture | Powered by Roboflow AI</p>
     <p>📧 Perfect for: Farmers, Students, Researchers, Garden Enthusiasts</p>
 </div>
+
 """, unsafe_allow_html=True)
