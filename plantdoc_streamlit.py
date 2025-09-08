@@ -10,15 +10,32 @@ from PIL import Image
 import io
 
 # Import your PlantDoc AI
+import streamlit as st
+import os
+
+# Debug: Show what files are available
+st.write("Current directory contents:")
+st.write(os.listdir('.'))
+
+# Try to import with detailed error info
+try:
+    import plantdoc_core
+    st.success("plantdoc_core module imported successfully!")
+    st.write("Available items in plantdoc_core:", dir(plantdoc_core))
+except Exception as e:
+    st.error(f"Failed to import plantdoc_core: {str(e)}")
+    st.write("Error type:", type(e).__name__)
+    import traceback
+    st.code(traceback.format_exc())
+
+# Try to import the specific class
 try:
     from plantdoc_core import PlantDocAI
-except ImportError:
-    # Debug: Show what files are available
-    st.write("Current directory contents:")
-    st.write(os.listdir('.'))
-    st.error("Please make sure 'plantdoc_core.py' is in the same directory")
-    st.stop()
-
+    st.success("PlantDocAI class imported successfully!")
+except Exception as e:
+    st.error(f"Failed to import PlantDocAI class: {str(e)}")
+    import traceback
+    st.code(traceback.format_exc())
 # Page configuration
 st.set_page_config(
     page_title="🌱 PlantDoc AI",
@@ -356,3 +373,4 @@ st.markdown("""
 </div>
 
 """, unsafe_allow_html=True)
+
