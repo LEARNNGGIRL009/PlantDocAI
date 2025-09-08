@@ -13,6 +13,9 @@ import io
 try:
     from plantdoc_core import PlantDocAI
 except ImportError:
+    # Debug: Show what files are available
+    st.write("Current directory contents:")
+    st.write(os.listdir('.'))
     st.error("Please make sure 'plantdoc_core.py' is in the same directory")
     st.stop()
 
@@ -351,4 +354,5 @@ st.markdown("""
     <p>Built with ❤️ for sustainable agriculture | Powered by Roboflow AI</p>
     <p>📧 Perfect for: Farmers, Students, Researchers, Garden Enthusiasts</p>
 </div>
+
 """, unsafe_allow_html=True)
