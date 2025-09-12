@@ -25,9 +25,32 @@ st.set_page_config(
 )
 
 # Custom CSS for mobile-friendly design
-# Custom CSS for mobile-friendly design
 st.markdown("""
 <style>
+    /* Professional background styling */
+    .stApp > header {
+        background-color: transparent;
+    }
+    
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
+    [data-testid="stMain"] > div {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Sidebar background */
+    [data-testid="stSidebar"] > div {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+    }       
     .main-header {
         text-align: center;
         background: linear-gradient(135deg, #2ecc71, #27ae60);
@@ -35,8 +58,8 @@ st.markdown("""
         border-radius: 10px;
         color: white;
         margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
     }
-    
     .disease-card {
         padding: 1rem;
         border-radius: 10px;
@@ -44,8 +67,8 @@ st.markdown("""
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    .healthy { border-left: 5px solid #2ecc71; background-color: #d4edda;  color: #000000 !important;  }
-    .medium-risk { border-left: 5px solid #f39c12; background-color: #fff3cd;  color: #000000 !important;  }
+    .healthy { border-left: 5px solid #2ecc71; background-color: #d4edda; color: #000000 !important; }
+    .medium-risk { border-left: 5px solid #f39c12; background-color: #fff3cd;  color: #000000 !important; }
     .high-risk { border-left: 5px solid #e67e22; background-color: #ffeaa7;  color: #000000 !important;  }
     .critical-risk { border-left: 5px solid #e74c3c; background-color: #f8d7da;  color: #000000 !important; }
     
@@ -368,10 +391,9 @@ with col2:
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: #666; padding: 1rem;">
+<div style="text-align: center; color: white; padding: 1rem;">
     <p>🌱 <strong>PlantDoc AI</strong> - Mobile Plant Disease Detection</p>
     <p>Built with ❤️ for sustainable agriculture | Powered by Roboflow AI</p>
     <p>📧 Perfect for: Farmers, Students, Researchers, Garden Enthusiasts</p>
 </div>
-
 """, unsafe_allow_html=True)
