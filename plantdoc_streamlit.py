@@ -1,4 +1,4 @@
-# PlantDoc AI - Streamlit Mobile Web App (Fixed Version)
+# PlantDoc AI - Streamlit Mobile Web App (Fixed Background Version)
 # Run with: streamlit run plantdoc_streamlit.py
 
 import streamlit as st
@@ -24,33 +24,32 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for mobile-friendly design
+# CSS styling that works with Streamlit Cloud
 st.markdown("""
 <style>
-    /* Professional background styling */
-    .stApp > header {
-        background-color: transparent;
+    /* Base body styling */
+    .stApp {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     }
     
-    [data-testid="stAppViewContainer"] {
+    /* Main container background */
+    .main-container {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
+        padding: 20px;
+        border-radius: 15px;
+        margin: -2rem -2rem 0 -2rem;
+        min-height: calc(100vh - 100px);
     }
     
-    [data-testid="stMain"] > div {
+    .content-wrapper {
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
         border-radius: 15px;
         padding: 2rem;
-        margin: 1rem;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
     }
     
-    /* Sidebar background */
-    [data-testid="stSidebar"] > div {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-    }       
+    /* Header styling */
     .main-header {
         text-align: center;
         background: linear-gradient(135deg, #2ecc71, #27ae60);
@@ -60,6 +59,8 @@ st.markdown("""
         margin-bottom: 2rem;
         box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
     }
+    
+    /* Disease card styling */
     .disease-card {
         padding: 1rem;
         border-radius: 10px;
@@ -67,11 +68,28 @@ st.markdown("""
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    .healthy { border-left: 5px solid #2ecc71; background-color: #d4edda; color: #000000 !important; }
-    .medium-risk { border-left: 5px solid #f39c12; background-color: #fff3cd;  color: #000000 !important; }
-    .high-risk { border-left: 5px solid #e67e22; background-color: #ffeaa7;  color: #000000 !important;  }
-    .critical-risk { border-left: 5px solid #e74c3c; background-color: #f8d7da;  color: #000000 !important; }
+    .healthy { 
+        border-left: 5px solid #2ecc71; 
+        background-color: #d4edda; 
+        color: #000000 !important; 
+    }
+    .medium-risk { 
+        border-left: 5px solid #f39c12; 
+        background-color: #fff3cd;  
+        color: #000000 !important; 
+    }
+    .high-risk { 
+        border-left: 5px solid #e67e22; 
+        background-color: #ffeaa7;  
+        color: #000000 !important;  
+    }
+    .critical-risk { 
+        border-left: 5px solid #e74c3c; 
+        background-color: #f8d7da;  
+        color: #000000 !important; 
+    }
     
+    /* Metric card styling */
     .metric-card {
         background: white;
         padding: 1rem;
@@ -80,7 +98,7 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
-    /* ADD THIS TREATMENT BOX STYLING */
+    /* Treatment box styling */
     .treatment-box {
         background-color: #f8f9fa;
         padding: 1.5rem;
@@ -98,6 +116,7 @@ st.markdown("""
         font-weight: 500;
     }
     
+    /* Button styling */
     .stButton button {
         width: 100%;
         background: linear-gradient(135deg, #2ecc71, #27ae60);
@@ -108,37 +127,33 @@ st.markdown("""
         font-weight: bold;
     }
     
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Footer styling */
+    .footer-text {
+        color: white !important;
+        text-align: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        margin-top: 2rem;
+    }
+    
     /* Mobile optimizations */
     @media (max-width: 768px) {
         .main-header h1 { font-size: 1.8rem; }
         .metric-card { margin: 0.5rem 0; }
         .treatment-box { padding: 1rem; }
+        .main-container { margin: -1rem; padding: 10px; }
     }
 </style>
 """, unsafe_allow_html=True)
-# Force background styling for deployment
-st.components.v1.html("""
-<script>
-setTimeout(function() {
-    const appView = document.querySelector('[data-testid="stAppViewContainer"]');
-    const main = document.querySelector('[data-testid="stMain"]');
-    
-    if (appView) {
-        appView.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-        appView.style.minHeight = '100vh';
-    }
-    
-    if (main) {
-        main.style.background = 'rgba(255, 255, 255, 0.95)';
-        main.style.backdropFilter = 'blur(10px)';
-        main.style.borderRadius = '15px';
-        main.style.margin = '1rem';
-        main.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
-    }
-}, 100);
-</script>
-""", height=0)
-# ==================== FUNCTION DEFINITIONS (MOVED TO TOP) ====================
+
+# ==================== FUNCTION DEFINITIONS ====================
 def display_results(result, is_demo=False):
     """Display analysis results in mobile-friendly format"""
     
@@ -151,7 +166,7 @@ def display_results(result, is_demo=False):
     elif "Medium Risk" in result['severity']:
         risk_class = "medium-risk"
     
-    # Main result card (FIXED - was showing treatment instead of disease info)
+    # Main result card
     st.markdown(f"""
     <div class="disease-card {risk_class}">
         <h2>🦠 {result['disease']}</h2>
@@ -180,7 +195,7 @@ def display_results(result, is_demo=False):
             with metric_cols[i]:
                 st.metric(label, f"{value:.1f}{unit}")
     
-    # Treatment recommendation (FIXED - now uses your CSS classes)
+    # Treatment recommendation
     st.subheader("💊 Treatment Recommendation")
     st.markdown(f"""
     <div class="treatment-box">
@@ -294,6 +309,10 @@ def share_results(result):
     st.success("📱 Copy the text above to share your results!")
 
 # ==================== MAIN APP ====================
+
+# Main container with background
+st.markdown('<div class="main-container">', unsafe_allow_html=True)
+st.markdown('<div class="content-wrapper">', unsafe_allow_html=True)
 
 # Initialize session state
 if 'analysis_history' not in st.session_state:
@@ -412,10 +431,12 @@ with col2:
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style="text-align: center; color: white; padding: 1rem;">
+<div class="footer-text">
     <p>🌱 <strong>PlantDoc AI</strong> - Mobile Plant Disease Detection</p>
     <p>Built with ❤️ for sustainable agriculture | Powered by Roboflow AI</p>
     <p>📧 Perfect for: Farmers, Students, Researchers, Garden Enthusiasts</p>
 </div>
-
 """, unsafe_allow_html=True)
+
+# Close container divs
+st.markdown('</div></div>', unsafe_allow_html=True)
