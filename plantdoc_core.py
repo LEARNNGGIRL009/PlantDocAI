@@ -653,7 +653,7 @@ class ImageChallengeHandler:
 class PlantDocAI:
     """PlantDoc AI with Smart Image Preprocessing"""
     
-    def __init__(self, api_key="L98TujqcVgJWuwfemlVv"):
+    def __init__(self, api_key="-----Give your generated API key"):
         """Initialize PlantDoc AI with smart preprocessing"""
         self.api_key = api_key
         self.client = None
@@ -1119,4 +1119,5 @@ def quick_test():
     return ai
 
 if __name__ == "__main__":
+
     quick_test()
