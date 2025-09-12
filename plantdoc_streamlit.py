@@ -116,7 +116,28 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
+# Force background styling for deployment
+st.components.v1.html("""
+<script>
+setTimeout(function() {
+    const appView = document.querySelector('[data-testid="stAppViewContainer"]');
+    const main = document.querySelector('[data-testid="stMain"]');
+    
+    if (appView) {
+        appView.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        appView.style.minHeight = '100vh';
+    }
+    
+    if (main) {
+        main.style.background = 'rgba(255, 255, 255, 0.95)';
+        main.style.backdropFilter = 'blur(10px)';
+        main.style.borderRadius = '15px';
+        main.style.margin = '1rem';
+        main.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+    }
+}, 100);
+</script>
+""", height=0)
 # ==================== FUNCTION DEFINITIONS (MOVED TO TOP) ====================
 def display_results(result, is_demo=False):
     """Display analysis results in mobile-friendly format"""
@@ -396,4 +417,5 @@ st.markdown("""
     <p>Built with ❤️ for sustainable agriculture | Powered by Roboflow AI</p>
     <p>📧 Perfect for: Farmers, Students, Researchers, Garden Enthusiasts</p>
 </div>
+
 """, unsafe_allow_html=True)
