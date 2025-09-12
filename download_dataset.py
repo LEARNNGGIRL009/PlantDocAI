@@ -4,7 +4,7 @@ import os
 import shutil
 
 # Initialize Roboflow with your actual API key
-rf = Roboflow(api_key="L98TujqcVgJWuwfemlVv")  # Replace with your actual API key
+rf = Roboflow(api_key="---Give your generated API Key")  # Replace with your actual API key
 
 # First, let's see what workspaces you have access to
 print("🔍 Available workspaces:")
